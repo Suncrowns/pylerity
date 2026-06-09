@@ -1,1 +1,1 @@
-from pylerity.api.api import CelerityApi
+from pylerity.api.api import Api

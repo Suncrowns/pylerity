@@ -1,11 +1,35 @@
 import requests
+from typing import Callable
 
 
 class ApiFields:
     api_destination = "/api"
+    api_header = "X-API-Key"
 
 
 class BaseApi:
     def __init__(self, addr: str, api_key: str):
-        self.addr = addr 
-        self.api_key = api_key
+        self._addr = addr 
+        self._api_key = api_key
+        self.max_retries = 3
+
+    
+    def _request_with_retry(self, addr: str, method: Callable[..., requests.Response], **options) -> requests.Response:
+        for retry in range(1, self.max_retries + 1):
+            print(f"Trying {method.__name__.upper()} to {addr}. Attempt {retry} of {self.max_retries}")
+            try:
+                req: requests.Responses = method(addr, **options)
+                return req
+            except:
+                continue
+        return TimeoutError("Request attempts are out")
+    
+
+    def _get(self, addr: str, **options):
+        req = self._request_with_retry(addr, requests.get, **options)
+        return req
+
+
+    def _post(self, addr: str, data: dict, **options):
+        req = self._request_with_retry(addr, requests.post, data=data, **options)
+        return req 

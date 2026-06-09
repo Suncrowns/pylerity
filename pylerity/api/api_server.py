@@ -1,4 +1,4 @@
-from pylerity.api import BaseApi, ApiFields
+from pylerity.api.api_base import BaseApi, ApiFields
 
 
 class ApiServer(BaseApi):
@@ -7,4 +7,16 @@ class ApiServer(BaseApi):
     
     @property
     def addr(self):
-        return self.addr
+        return self._addr
+    
+    @addr.setter
+    def addr(self, addr: str):
+        self._addr = addr
+
+    
+    @property
+    def stats(self):
+        addr = self.addr + ApiFields.api_destination + "/stats"
+        headers = {ApiFields.api_header: self._api_key}
+        req = self._get(addr=addr, headers=headers)
+        return req.json()
