@@ -1,11 +1,12 @@
 from pydantic import Field, BaseModel
+from datetime import datetime 
 
 
 class User(BaseModel):
     """POST section"""
     userId: str 
     enabled: bool 
-    expireAt: int | str | None = Field(default=None)
+    expireAt: datetime | str | None = Field(default=None)
     groups: list | None = Field(default=[])
     trafficLimit: int | None = Field(default=0)
     username: str 

@@ -1,1 +1,2 @@
-from pylerity.api.api import Api
+from pylerity.api import Api
+from pylerity.user import User

@@ -5,6 +5,9 @@ from typing import Callable
 class ApiFields:
     api_destination = "/api"
     api_header = "X-API-Key"
+    content_type_header = "Content-Type"
+    accept_header = "accept"
+    post_value = "application/json"
 
 
 class BaseApi:
@@ -31,5 +34,5 @@ class BaseApi:
 
 
     def _post(self, addr: str, data: dict, **options):
-        req = self._request_with_retry(addr, requests.post, data=data, **options)
+        req = self._request_with_retry(addr, requests.post, json=data, **options)
         return req 
