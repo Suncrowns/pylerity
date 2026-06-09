@@ -1,0 +1,6 @@
+pydantic==2.13.4
+pydantic-core==2.46.4
+python-dotenv==1.2.2
+requests==2.34.2
+typing-extensions==4.15.0
+typing-inspection==0.4.2
