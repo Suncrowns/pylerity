@@ -42,7 +42,7 @@ class ApiUser(BaseApi):
         raise ValueError(f"Error {result.status_code} {dict(result.json()).get('error')}")
 
 
-    def create(self, user: User):
+    def add(self, user: User):
         addr = self._generate_url("/users")
         headers = {ApiFields.api_header: self._api_key, ApiFields.accept_header: ApiFields.post_value, ApiFields.content_type_header: ApiFields.post_value}
         
