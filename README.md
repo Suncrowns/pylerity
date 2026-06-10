@@ -1,10 +1,10 @@
 # Pylerity
 
-Python SDK for (C³ CELERITY panel)[https://github.com/ClickDevTech/CELERITY-panel]. Work for 1.3.1 version, requiring python 3.12+. 
+Python SDK for [https://github.com/ClickDevTech/CELERITY-panel](C³ CELERITY panel). Work for 1.3.1 version, requiring python 3.12+. 
 
 ## Overview 
 
-This SDK is designed to interact with the (C³ CELERITY panel)[https://github.com/ClickDevTech/CELERITY-panel]. It provides only synchronous methods to interract with app, in the near feature planning to add asynchronous methods. The SDK is designed to be simple as far as it possible, pydantic stricly validation and own validation functions provides flexibility and reliability. 
+This SDK is designed to interact with the [https://github.com/ClickDevTech/CELERITY-panel](C³ CELERITY panel). It provides only synchronous methods to interract with app, in the near feature planning to add asynchronous methods. The SDK is designed to be simple as far as it possible, pydantic stricly validation and own validation functions provides flexibility and reliability. 
 
 SDK does not support version older 1.3.1, and dont work with python lower than 3.12
 
