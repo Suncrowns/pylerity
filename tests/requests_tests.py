@@ -2,8 +2,8 @@ import os
 from dotenv import load_dotenv 
 from pprint import pprint
 
-from pylerity import Api
-from pylerity import User
+from pylerity import Api, User, Group
+import json 
 
 
 import requests
@@ -18,14 +18,13 @@ api = Api(addr=DOMAIN, api_key=API_KEY)
 # stats = api.server.stats
 # pprint(stats)
 
-
-# user = api.user.get_by_id("test2")
-# print(user.trafficLimit)
-# user.trafficLimit = 10737418240
-
-# update_result = api.user.update(user)
-# print(update_result)
-
-
-result = api.user.delete_by_id(user_id="test2")
+group = Group(
+    name="testGroup",
+    active=True,
+    color="ffffff",
+    description="123131",
+    maxDevices=1,
+    subscriptionTitle="penisss"
+)
+result = api.group.add(group)
 print(result)

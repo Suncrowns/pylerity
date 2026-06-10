@@ -27,7 +27,7 @@ class ApiUser(BaseApi):
         if result.status_code == 200:
             user = User.model_validate(dict(result.json()))
             return user
-        return result.status_code, result.json()
+        raise ValueError(f"Error {result.status_code} {dict(result.json()).get('error')}")
     
 
     def get_all(self):
@@ -39,7 +39,7 @@ class ApiUser(BaseApi):
             lst_of_json_users = dict(result.json())["users"]
             lst_of_users = [User.model_validate(usr) for usr in lst_of_json_users]
             return lst_of_users
-        return result.status_code
+        raise ValueError(f"Error {result.status_code} {dict(result.json()).get('error')}")
 
 
     def create(self, user: User):
@@ -53,7 +53,7 @@ class ApiUser(BaseApi):
         if result.status_code == 201:
             user = User.model_validate(dict(result.json()))
             return user
-        return result.status_code
+        raise ValueError(f"Error {result.status_code} {dict(result.json()).get('error')}")
     
 
     def update(self, user: User):
@@ -71,7 +71,7 @@ class ApiUser(BaseApi):
         result = self._put(addr=addr, data=filtered_data, headers=headers)
         if result.status_code == 200:
             return User.model_validate(dict(result.json()))
-        return result.status_code
+        raise ValueError(f"Error {result.status_code} {dict(result.json()).get('error')}")
     
 
     def delete_by_id(self, user_id: str):
@@ -80,4 +80,4 @@ class ApiUser(BaseApi):
         req = self._delete(addr=addr, headers=headers)
         if req.status_code == 201:
             return True 
-        return req.status_code
+        raise ValueError(f"Error {req.status_code} {dict(req.json()).get('error')}")

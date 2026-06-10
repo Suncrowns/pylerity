@@ -1,5 +1,6 @@
-from.api_user import ApiUser
+from .api_user import ApiUser
 from .api_server import ApiServer
+from .api_groups import ApiGroup
 
 
 class Api:
@@ -14,6 +15,10 @@ class Api:
             addr=self._addr,
             api_key=self._api_key
         )
+        self.group = ApiGroup(
+            addr=self._addr,
+            api_key=self._api_key
+        )
 
     
     @property
@@ -23,6 +28,7 @@ class Api:
 
     @addr.setter
     def addr(self, value: str):
+        self.group._addr = value
         self.server.addr = value  # без подчеркивания тк тут нормальный сеттер
         self.user._addr = value
         self._addr = value
