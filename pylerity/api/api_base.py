@@ -16,6 +16,11 @@ class BaseApi:
         self._api_key = api_key
         self.max_retries = 3
 
+
+    def _generate_url(self, dest: str):
+        dest = dest.strip("/")
+        return self._addr + ApiFields.api_destination + "/" + dest
+
     
     def _request_with_retry(self, addr: str, method: Callable[..., requests.Response], **options) -> requests.Response:
         for retry in range(1, self.max_retries + 1):
@@ -36,3 +41,9 @@ class BaseApi:
     def _post(self, addr: str, data: dict, **options):
         req = self._request_with_retry(addr, requests.post, json=data, **options)
         return req 
+    
+
+    def _put(self, addr: str, data: dict | None = None, **options):
+        req = self._request_with_retry(addr, requests.put, json=data, **options)
+        return req
+

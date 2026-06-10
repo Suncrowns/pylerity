@@ -16,7 +16,7 @@ class ApiServer(BaseApi):
     
     @property
     def stats(self):
-        addr = self.addr + ApiFields.api_destination + "/stats"
+        addr = self._generate_url("/stats")
         headers = {ApiFields.api_header: self._api_key}
         req = self._get(addr=addr, headers=headers)
         return req.json()

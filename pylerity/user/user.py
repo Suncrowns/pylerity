@@ -4,7 +4,7 @@ from datetime import datetime
 
 class User(BaseModel):
     """POST section"""
-    userId: str 
+    user_id: str = Field(alias="userId", serialization_alias="userId")
     enabled: bool 
     expireAt: datetime | str | None = Field(default=None)
     groups: list | None = Field(default=[])

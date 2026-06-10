@@ -18,14 +18,10 @@ api = Api(addr=DOMAIN, api_key=API_KEY)
 # stats = api.server.stats
 # pprint(stats)
 
-# user = api.user.get_by_id("admin")
-# pprint(user.id)
 
+user = api.user.get_by_id("test2")
+print(user.trafficLimit)
+user.trafficLimit = 10737418240
 
-user = User(
-    userId="test3", enabled=True, expireAt="2026-12-31T23:59:59.000Z", groups=["6a256e63f82ad772acc0a9dc"], username="test3"
-)
-result = api.user.create(user)
-pprint(result)
-
-
+update_result = api.user.update(user)
+print(update_result)
