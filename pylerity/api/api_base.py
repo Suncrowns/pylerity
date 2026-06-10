@@ -30,7 +30,7 @@ class BaseApi:
                 return req
             except:
                 continue
-        return TimeoutError("Request attempts are out")
+        raise TimeoutError("Request attempts are out")
     
 
     def _get(self, addr: str, **options):
@@ -47,3 +47,8 @@ class BaseApi:
         req = self._request_with_retry(addr, requests.put, json=data, **options)
         return req
 
+
+    def _delete(self, addr: str, **options):
+        req = self._request_with_retry(addr, requests.delete, **options)
+        return req 
+    

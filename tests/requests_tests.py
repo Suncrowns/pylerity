@@ -19,9 +19,13 @@ api = Api(addr=DOMAIN, api_key=API_KEY)
 # pprint(stats)
 
 
-user = api.user.get_by_id("test2")
-print(user.trafficLimit)
-user.trafficLimit = 10737418240
+# user = api.user.get_by_id("test2")
+# print(user.trafficLimit)
+# user.trafficLimit = 10737418240
 
-update_result = api.user.update(user)
-print(update_result)
+# update_result = api.user.update(user)
+# print(update_result)
+
+
+result = api.user.delete_by_id(user_id="test2")
+print(result)

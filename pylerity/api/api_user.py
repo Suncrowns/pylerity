@@ -72,3 +72,12 @@ class ApiUser(BaseApi):
         if result.status_code == 200:
             return User.model_validate(dict(result.json()))
         return result.status_code
+    
+
+    def delete_by_id(self, user_id: str):
+        addr = self._generate_url(f"/users/{user_id}")
+        headers = {ApiFields.api_header: self._api_key}
+        req = self._delete(addr=addr, headers=headers)
+        if req.status_code == 201:
+            return True 
+        return req.status_code
