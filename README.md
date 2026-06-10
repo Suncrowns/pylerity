@@ -21,7 +21,7 @@ pip install -e .
 
 ## Quickstart
 
-#### Get user by its userId
+#### Get user by userId
 
 ```python
 import os 
