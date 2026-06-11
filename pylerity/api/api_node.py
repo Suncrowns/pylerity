@@ -18,3 +18,12 @@ class ApiNode(BaseApi):
                 list_of_nodes.append(node)
             return list_of_nodes
         raise ValueError(f"Error {req.status_code} {dict(req.json()).get("error")}")
+    
+
+    def get_by_id(self, nodeId: str):
+        addr = self._generate_url(f"/nodes/{nodeId}")
+        headers = {ApiFields.api_header: self._api_key}
+        req = self._get(addr, headers=headers)
+        if req.status_code == 200:
+            return Node.model_validate(dict(req.json()))
+        raise ValueError(f"Error {req.status_code} {dict(req.json()).get("error")}")

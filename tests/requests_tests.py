@@ -19,4 +19,4 @@ api = Api(addr=DOMAIN, api_key=API_KEY)
 
 all_nodes = api.nodes.get_all()
 
-pprint(all_nodes)
+print(all_nodes[0].id)

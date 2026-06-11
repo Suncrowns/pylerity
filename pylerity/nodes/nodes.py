@@ -30,7 +30,7 @@ class Node(BaseModel):
     comment: str = Field(max_length=500)
     country: str 
     domain: str 
-    groups: List[Group]
+    groups: List[Group] | List[str]
     ip: str 
     maxOnlineUsers: int | None = Field(default=0)
     port: int 
@@ -43,3 +43,4 @@ class Node(BaseModel):
 
 
     """GET section"""
+    id: str = Field(default=None, alias="_id")
