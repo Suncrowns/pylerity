@@ -1,4 +1,5 @@
 from .api_base import BaseApi, ApiFields
+from pylerity.nodes import Node
 
 
 class ApiNode(BaseApi):
@@ -11,4 +12,9 @@ class ApiNode(BaseApi):
         headers = {ApiFields.api_header: self._api_key}
         req = self._get(addr, headers=headers)
         if req.status_code == 200:
-            return req.json()
+            list_of_nodes = []
+            for node in list(req.json()):
+                node = Node.model_validate(dict(node))
+                list_of_nodes.append(node)
+            return list_of_nodes
+        raise ValueError(f"Error {req.status_code} {dict(req.json()).get("error")}")

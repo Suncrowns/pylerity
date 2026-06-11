@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List, Any
 from enum import Enum
+from pylerity.groups import Group
 
 
 class CascadeRole(Enum):
@@ -29,7 +30,7 @@ class Node(BaseModel):
     comment: str = Field(max_length=500)
     country: str 
     domain: str 
-    groups: List[str]
+    groups: List[Group]
     ip: str 
     maxOnlineUsers: int | None = Field(default=0)
     port: int 
@@ -39,5 +40,6 @@ class Node(BaseModel):
 
     ssh: SSH | None = Field(default=None)
     type: NodeType | str
-    
 
+
+    """GET section"""
