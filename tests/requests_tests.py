@@ -15,29 +15,8 @@ API_KEY = os.getenv("API_KEY")
 
 
 api = Api(addr=DOMAIN, api_key=API_KEY)
-# stats = api.server.stats
-# pprint(stats)
-
-# group = Group(
-#     name="testGroup",
-#     active=True,
-#     color="ffffff",
-#     description="123131",
-#     maxDevices=1,
-#     subscriptionTitle="penisss"
-# )
-# result = api.group.add(group)
-# print(result)
 
 
-user = User(
-    user_id = "test",
-    enabled = True,
-    expireAt = "2026-07-21T17:32:28Z",
-    groups = [],
-    trafficLimit = 0,
-    username = "test"
-)
+all_nodes = api.nodes.get_all()
 
-result = api.user.add(user)
-print(result)
+pprint(all_nodes)

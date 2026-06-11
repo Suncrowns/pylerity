@@ -1,6 +1,7 @@
 from .api_user import ApiUser
 from .api_server import ApiServer
 from .api_groups import ApiGroup
+from .api_node import ApiNode
 
 
 class Api:
@@ -19,6 +20,10 @@ class Api:
             addr=self._addr,
             api_key=self._api_key
         )
+        self.nodes = ApiNode(
+            addr=self._addr,
+            api_key=self._api_key
+        )
 
     
     @property
@@ -31,6 +36,7 @@ class Api:
         self.group._addr = value
         self.server.addr = value  # без подчеркивания тк тут нормальный сеттер
         self.user._addr = value
+        self.nodes._addr = value 
         self._addr = value
         return value
 
