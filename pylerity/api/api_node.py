@@ -1,5 +1,7 @@
 from .api_base import BaseApi, ApiFields
-from pylerity.nodes import Node
+from pylerity.nodes import Node, NodeType
+import yaml 
+import json
 
 
 class ApiNode(BaseApi):
@@ -27,3 +29,14 @@ class ApiNode(BaseApi):
         if req.status_code == 200:
             return Node.model_validate(dict(req.json()))
         raise ValueError(f"Error {req.status_code} {dict(req.json()).get("error")}")
+    
+
+    def get_hysteria_settings(self, node: Node):
+        if node.type != NodeType.hysteria and node.type != "hysteria":
+            raise ValueError("Type of node is not hysteria")
+        addr = self._generate_url(f"nodes/{node.id}/config")
+        headers = {ApiFields.api_header: self._api_key}
+        req = self._get(addr, headers=headers)
+        if req.status_code == 200:
+            yaml_data = yaml.safe_load(req.text)
+            return dict(json.dumps(yaml_data))

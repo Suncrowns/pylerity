@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from pprint import pprint
 
 from pylerity import Api, User, Group
+from pylerity.nodes import NodeType
 import json 
 
 
@@ -21,4 +22,5 @@ all_nodes = api.nodes.get_all()
 
 
 node = api.nodes.get_by_id(all_nodes[0].id)
-pprint(node)
+config = api.nodes.get_hysteria_settings(node)
+pprint(config)
