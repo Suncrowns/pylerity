@@ -70,3 +70,29 @@ user = User(
 result = api.user.add(user)
 print(result)
 ```
+
+
+#### Get hysteria settings
+```python
+import os
+from dotenv import load_dotenv 
+from pprint import pprint
+from pylerity import Api, Node
+
+
+load_dotenv()
+DOMAIN = os.getenv("DOMAIN")
+API_KEY = os.getenv("API_KEY")
+
+
+api = Api(addr=DOMAIN, api_key=API_KEY)
+
+all_nodes = api.nodes.get_all()
+node1 = api.nodes.get_by_id(all_nodes[0].id)
+
+print(api.nodes.get_hysteria_settings(node1))
+```
+
+
+
+
