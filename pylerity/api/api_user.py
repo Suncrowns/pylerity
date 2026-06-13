@@ -51,6 +51,7 @@ class ApiUser(BaseApi):
         
         result = self._post(addr=addr, data=filtered_data, headers=headers)
         if result.status_code == 201:
+            print(result.json())
             user = User.model_validate(dict(result.json()))
             return user
         raise ValueError(f"Error {result.status_code} {dict(result.json()).get('error')}")
@@ -67,7 +68,6 @@ class ApiUser(BaseApi):
 
         data = user.model_dump()
         filtered_data = filter_data(data=data, fields=UserFilterFields.put_fields)
-        print(filtered_data)
         result = self._put(addr=addr, data=filtered_data, headers=headers)
         if result.status_code == 200:
             return User.model_validate(dict(result.json()))
@@ -78,6 +78,6 @@ class ApiUser(BaseApi):
         addr = self._generate_url(f"/users/{user_id}")
         headers = {ApiFields.api_header: self._api_key}
         req = self._delete(addr=addr, headers=headers)
-        if req.status_code == 201:
+        if req.status_code == 200:
             return True 
         raise ValueError(f"Error {req.status_code} {dict(req.json()).get('error')}")

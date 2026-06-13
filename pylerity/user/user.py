@@ -1,18 +1,23 @@
-from pydantic import Field, BaseModel
+from pydantic import Field, BaseModel, ConfigDict
 from datetime import datetime 
 
 
 class User(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+        serialize_by_alias=True
+    )
+    
     """POST section"""
-    userId: str = Field(alias="user_id")
+    user_id: str = Field(validation_alias="userId", serialization_alias="userId")
     enabled: bool 
-    expireAt: datetime | str | None = Field(default=None)
+    expireAt: str | None = Field(default=None)
     groups: list | None = Field(default=[])
     trafficLimit: int | None = Field(default=0)
     username: str 
 
     """GET/PUT section"""
-    id: str | None = Field(default = None, alias="_id", serialization_alias="_id")
+    id: str | None = Field(default = None, serialization_alias="_id")
     password: str | None = Field(default=None)
     xrayUuid: str | None = Field(default=None)
     nodes: list | None = Field(default=None)

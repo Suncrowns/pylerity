@@ -26,7 +26,7 @@ class SSH(BaseModel):
 class Node(BaseModel):
     """POST section"""
     name: str 
-    type: str 
+    type: str | NodeType
     cascadeRole: str | CascadeRole
     comment: str = Field(max_length=500)
     country: str 

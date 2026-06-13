@@ -39,4 +39,4 @@ class ApiNode(BaseApi):
         req = self._get(addr, headers=headers)
         if req.status_code == 200:
             yaml_data = yaml.safe_load(req.text)
-            return dict(json.dumps(yaml_data))
+            return dict(yaml_data)
